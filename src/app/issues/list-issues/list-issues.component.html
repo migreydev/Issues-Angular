@@ -32,8 +32,8 @@
             <td>{{issue.title}}</td>
             <td>{{issue.status}}</td>
             <td>
-              <i class="bi bi-pencil mx-2"></i>
-              <i class="bi bi-trash"></i>
+              <a class="bi bi-pencil mx-2" (click)="editIssue(issue._id)"></a>
+              <a class="bi bi-trash"></a>
           </tr>
         </tbody>
       }

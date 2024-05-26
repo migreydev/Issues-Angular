@@ -23,12 +23,12 @@ export class IssuesService {
     return this.http.post<Issue>(this.issuesUrl,issue);
   }
 
-  getIssueById(_id : number): Observable<Issue>{
+  getIssueById(_id : string): Observable<Issue>{
     const url = `${this.issuesUrl}/${_id}`;
     return this.http.get<Issue>(url);
   }
 
-  editIssue(_id : number, issue: Issue): Observable<Issue>{
+  editIssue(_id : string, issue: Issue): Observable<Issue>{
     const url = `${this.issuesUrl}/${_id}`;
     return this.http.put<Issue>(url,issue);
   }

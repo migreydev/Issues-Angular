@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { IssuesService } from '../../services/issues.service';
 import { Issue, Main } from '../../interfaces/issue';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ListIssuesComponent implements OnInit{
 
-  constructor(private issueService : IssuesService){}
+  constructor(private issueService : IssuesService,
+              private router: Router
+  ){}
 
   ngOnInit(): void {
     this.getIssues();
@@ -27,6 +29,11 @@ export class ListIssuesComponent implements OnInit{
       this.issues = response.issues;
     });
   }
+
+  editIssue(_id: string){
+    this.router.navigate(['/add', _id]);
+  }
+  
   
 
 }
