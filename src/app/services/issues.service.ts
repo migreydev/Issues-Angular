@@ -18,4 +18,18 @@ export class IssuesService {
   getIssues() {
     return this.http.get<Main>(this.issuesUrl);
   }
+
+  addIssue(issue : Omit<Issue, '_id'>): Observable<Issue> {
+    return this.http.post<Issue>(this.issuesUrl,issue);
+  }
+
+  getIssueById(_id : number): Observable<Issue>{
+    const url = `${this.issuesUrl}/${_id}`;
+    return this.http.get<Issue>(url);
+  }
+
+  editIssue(_id : number, issue: Issue): Observable<Issue>{
+    const url = `${this.issuesUrl}/${_id}`;
+    return this.http.put<Issue>(url,issue);
+  }
 }

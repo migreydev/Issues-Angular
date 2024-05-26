@@ -1,26 +1,63 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 <div class="container">
-  <h1>Añadir incidencia</h1>
-  <form>
-    <div class="mb-3">
-      <label for="title" class="form-label">Título</label>
-      <input type="text" class="form-control" id="title" aria-describedby="titleHelp">
-      <div id="titleHelp" class="form-text">Introduce un título descriptivo.</div>
-    </div>
-    <div class="mb-3">
-      <label for="description" class="form-label">Descripción</label>
-      <textarea class="form-control" placeholder="Describe la incidencia detalladamente" id="description"></textarea>
-    </div>
-    <div class="mb-3">
-      <label class="form-label" for="status">Estado</label>
-      <select class="form-select" aria-label="Default select example" id="status">
-        <option selected>Selecciona el estado</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Añadir</button>
-  </form>
+
+  @if(!modeEdit){
+    <h1>Añadir incidencia</h1>
+    <form (ngSubmit)="onSubmit()">
+      @if(add){
+        <div>
+          <div id="add" class="alert alert-success">{{ add }}</div>
+        </div>        
+        }
+        @if(error){
+          <div>
+            <div id="error" class="alert alert-danger">{{ error }}</div>
+          </div>
+        }
+      <div class="mb-3">
+        <label for="title" class="form-label">Título</label>
+        <input type="text" class="form-control" id="title" aria-describedby="titleHelp"  [(ngModel)]="issue.title" name="title">
+        <div id="titleHelp" class="form-text">Introduce un título descriptivo.</div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea class="form-control" placeholder="Describe la incidencia detalladamente" id="description" [(ngModel)]="issue.description" name="description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" >Añadir</button>
+    </form>
+  }@else {
+    <h1>Editar incidencia</h1>
+    <form (ngSubmit)="onSubmit()">
+      @if(edit){
+        <div>
+          <div id="edit" class="aler alert-success">{{ edit }}</div>
+        </div>
+        }
+        @if(error){
+          <div>
+            <div id="error" class="aler alert-danger">{{ error }}</div>
+          </div>
+        }
+      <div class="mb-3">
+        <label for="title" class="form-label">Título</label>
+        <input type="text" class="form-control" id="title" aria-describedby="titleHelp"  [(ngModel)]="issue.title" name="title">
+        <div id="titleHelp" class="form-text">Introduce un título descriptivo.</div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea class="form-control" placeholder="Describe la incidencia detalladamente" id="description" [(ngModel)]="issue.description" name="description"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="status">Estado</label>
+        <select class="form-select" aria-label="Default select example" id="status" [(ngModel)]="issue.status" name="status">
+          <option selected>Selecciona el estado</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-warning" >Editar</button>
+    </form>
+  }
 </div>
 </main>

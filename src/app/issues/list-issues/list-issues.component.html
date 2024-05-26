@@ -20,7 +20,7 @@
     @for (issue of issues; track $index) {
       <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">Título</th>
             <th scope="col">Estado</th>
             <th scope="col">Editar/Eliminar</th>
@@ -32,8 +32,8 @@
             <td>{{issue.title}}</td>
             <td>{{issue.status}}</td>
             <td>
-              <i class="bi bi-pencil mx-2">{{issue._id}}</i>
-              <i class="bi bi-trash">{{issue._id}}</i>
+              <i class="bi bi-pencil mx-2"></i>
+              <i class="bi bi-trash"></i>
           </tr>
         </tbody>
       }
