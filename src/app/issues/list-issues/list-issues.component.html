@@ -1,4 +1,5 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <router-outlet></router-outlet>
 <div class="container">
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -12,10 +13,11 @@
               <option value="en proceso">En proceso</option>
               <option value="cerrada">Cerrada</option>
           </select>
-    
         </header>
     </div>
+    <a class="btn btn-primary btn-lg" routerLink="/issues/add">Añadir incidencia</a>
   <table class="table table-striped">
+    @for (issue of issues; track $index) {
       <thead>
           <tr>
             <th scope="col">#</th>
@@ -26,35 +28,15 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>incidencia 1</td>
-            <td>Abierta</td>
+            <th scope="row">{{issue._id}}</th>
+            <td>{{issue.title}}</td>
+            <td>{{issue.status}}</td>
             <td>
-              <i class="bi bi-pencil mx-2"></i>
-              <i class="bi bi-trash"></i>
-          </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>incidencia 2</td>
-            <td>Cerrada</td>
-            <td>
-              <i class="bi bi-pencil mx-2"></i>
-              <i class="bi bi-trash"></i>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>incidencia 3</td>
-            <td>En proceso</td>
-            <td>
-              <i class="bi bi-pencil mx-2"></i>
-              <i class="bi bi-trash"></i>
-            </td>
+              <i class="bi bi-pencil mx-2">{{issue._id}}</i>
+              <i class="bi bi-trash">{{issue._id}}</i>
           </tr>
         </tbody>
+      }
     </table>
-    <a class="btn btn-primary btn-lg" routerLink="/issues/add">Añadir incidencia</a>
 </div>
 </main>
-<router-outlet></router-outlet>
