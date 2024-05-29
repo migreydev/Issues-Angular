@@ -6,18 +6,11 @@
   
       <header class="navbar sticky-top  flex-md-nowrap p-0 shadow">
     
-        <!-- <input class="form-control w-100" type="text" placeholder="Search" aria-label="Search"> -->
-          <select class="form-select" >
-              <option></option>
-              <option value="abierta">Abierta</option>
-              <option value="en proceso">En proceso</option>
-              <option value="cerrada">Cerrada</option>
-          </select>
+      <app-select-type (type)="typeRecibido = $event"></app-select-type>
         </header>
     </div>
     <a class="btn btn-primary btn-lg" routerLink="/issues/add">Añadir incidencia</a>
   <table class="table table-striped">
-    @for (issue of issues; track $index) {
       <thead>
           <tr>
             <th scope="col">Id</th>
@@ -27,16 +20,20 @@
           </tr>
         </thead>
         <tbody>
+          @for (issue of issues; track $index) {
           <tr>
-            <th scope="row">{{issue._id}}</th>
-            <td>{{issue.title}}</td>
-            <td>{{issue.status}}</td>
-            <td>
-              <a class="bi bi-pencil mx-2" (click)="editIssue(issue._id)"></a>
-              <a class="bi bi-trash"></a>
+              @if(typeRecibido === '' || issue.status === typeRecibido){
+
+              <th scope="row">{{issue._id}}</th>
+              <td>{{issue.title}}</td>
+              <td>{{issue.status}}</td>
+              <td>
+                <a class="bi bi-pencil mx-2" (click)="editIssue(issue._id)"></a>
+                <a class="bi bi-trash"></a>
+            }
           </tr>
+        }
         </tbody>
-      }
     </table>
 </div>
 </main>
