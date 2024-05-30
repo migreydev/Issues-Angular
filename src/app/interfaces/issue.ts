@@ -10,3 +10,7 @@ export interface Main {
     total:  number;
     issues: Issue[];
 }
+
+export interface respuestaIssue {
+    issue: Issue;
+}

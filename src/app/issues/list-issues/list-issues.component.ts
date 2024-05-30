@@ -35,7 +35,7 @@ export class ListIssuesComponent implements OnInit{
   }
 
   editIssue(_id: string){
-    this.router.navigate(['/add', _id]);
+    this.router.navigate(['/issues', _id]);
   }
   
   

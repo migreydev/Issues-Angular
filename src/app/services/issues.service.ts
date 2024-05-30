@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { Issue, Main } from '../interfaces/issue';
+import { Issue, Main, respuestaIssue } from '../interfaces/issue';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,9 +23,9 @@ export class IssuesService {
     return this.http.post<Issue>(this.issuesUrl,issue);
   }
 
-  getIssueById(_id : string): Observable<Issue>{
+  getIssueById(_id: string): Observable<respuestaIssue> {
     const url = `${this.issuesUrl}/${_id}`;
-    return this.http.get<Issue>(url);
+    return this.http.get<respuestaIssue>(url); 
   }
 
   editIssue(_id : string, issue: Issue): Observable<Issue>{

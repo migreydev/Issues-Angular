@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../interfaces/issue';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-issues',
@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
   imports: [FormsModule],
   templateUrl: './form-issues.component.html'
 })
-export class FormIssuesComponent {
+export class FormIssuesComponent implements OnInit{
 
   constructor(private issueService : IssuesService,
-              private router: Router
+              private router: Router,
+              private route: ActivatedRoute
   ){}
+
 
   modeEdit : boolean = false;
   error : string = '';
@@ -28,17 +30,67 @@ export class FormIssuesComponent {
     __v:  0
   }
 
-  onSubmit() {
-    this.issueService.addIssue(this.issue).subscribe(
-      () => {
-        this.add = 'La incidencia se añadió correctamente';
-        //this.router.navigate(['/issues']);
-      },
-      (error) => {
-        console.error('Error al añadir la incidencia:', error);
-      }
-    );
+  issueEdit : Issue = {
+    description: '',
+    status: '',
+    title: '',
+    __v:  0,
+    _id: ''
+
   }
+
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.modeEdit = true;
+        this.getIssueByID(id);
+      }
+    });
+  }
+
+  getIssueByID(id: string): void {
+    this.issueService.getIssueById(id).subscribe({
+      next: (response) => {
+        this.issueEdit = response.issue; 
+        console.log('Datos de la incidencia:', this.issueEdit);
+      },
+      error: error => {
+        console.error('Error', error);
+      }
+    });
+  }
+
+
   
+  onSubmit() {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (this.modeEdit){
+
+        this.issueService.editIssue(id, this.issueEdit).subscribe({
+          next: issue =>{
+            this.edit = "La incidencia se edito correctamente";
+          },
+          error: error =>{
+            console.error('Error al añadir la incidencia:', error);
+          }
+        })
+
+      }else {
+
+        this.issueService.addIssue(this.issue).subscribe({
+          next: issue => {
+            this.add = 'La incidencia se añadió correctamente';
+            // this.router.navigate(['/issues']);
+          },
+          error: error => {
+            console.error('Error al añadir la incidencia:', error);
+          }
+        });
+      }
+    })
+  }
 
 }
