@@ -32,4 +32,10 @@ export class IssuesService {
     const url = `${this.issuesUrl}/${_id}`;
     return this.http.put<Issue>(url,issue);
   }
+
+  deleteIssue(id: string): Observable<respuestaIssue> {
+    const url = `${this.issuesUrl}/${id}`;
+    return this.http.delete<respuestaIssue>(url);
+  }
+  
 }

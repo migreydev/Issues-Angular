@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../interfaces/issue';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ListIssuesComponent } from "../list-issues/list-issues.component";
 
 @Component({
-  selector: 'app-form-issues',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './form-issues.component.html'
+    selector: 'app-form-issues',
+    standalone: true,
+    templateUrl: './form-issues.component.html',
+    imports: [FormsModule, ListIssuesComponent]
 })
 export class FormIssuesComponent implements OnInit{
 
@@ -22,6 +23,7 @@ export class FormIssuesComponent implements OnInit{
   error : string = '';
   add: string = '';
   edit: string = '';
+
 
   issue: Omit<Issue, '_id'> = {
     title: '',
@@ -50,6 +52,7 @@ export class FormIssuesComponent implements OnInit{
     });
   }
 
+
   getIssueByID(id: string): void {
     this.issueService.getIssueById(id).subscribe({
       next: (response) => {
@@ -67,6 +70,7 @@ export class FormIssuesComponent implements OnInit{
   onSubmit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+
       if (this.modeEdit){
 
         this.issueService.editIssue(id, this.issueEdit).subscribe({
@@ -83,7 +87,7 @@ export class FormIssuesComponent implements OnInit{
         this.issueService.addIssue(this.issue).subscribe({
           next: issue => {
             this.add = 'La incidencia se añadió correctamente';
-            // this.router.navigate(['/issues']);
+            this.router.navigate(['/issues']);
           },
           error: error => {
             console.error('Error al añadir la incidencia:', error);
@@ -92,5 +96,6 @@ export class FormIssuesComponent implements OnInit{
       }
     })
   }
+
 
 }

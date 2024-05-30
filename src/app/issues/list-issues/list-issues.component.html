@@ -10,6 +10,11 @@
         </header>
     </div>
     <a class="btn btn-primary btn-lg" routerLink="/issues/add">Añadir incidencia</a>
+  @if(this.mensaje) {
+    <div>
+      <div class="alert alert-success">{{this.mensaje}}</div>
+    </div>
+  }
   <table class="table table-striped">
       <thead>
           <tr>
@@ -29,7 +34,7 @@
               <td>{{issue.status}}</td>
               <td>
                 <a class="bi bi-pencil mx-2" (click)="editIssue(issue._id)"></a>
-                <a class="bi bi-trash"></a>
+                <a class="bi bi-trash" (click)="deleteIssue(issue._id)"></a>
             }
           </tr>
         }
@@ -37,3 +42,4 @@
     </table>
 </div>
 </main>
+

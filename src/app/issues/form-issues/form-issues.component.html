@@ -6,7 +6,7 @@
     <form (ngSubmit)="onSubmit()">
       @if(edit){
         <div>
-          <div id="edit" class="aler alert-success">{{ edit }}</div>
+          <div id="edit"  class="alert alert-success">{{ edit }}</div>
         </div>
         }
         @if(error){
@@ -28,8 +28,8 @@
         <select class="form-select" aria-label="Default select example" id="status" [(ngModel)]="issueEdit.status" name="status">
           <option selected>Selecciona el estado</option>
           <option value="abierta">Abierta</option>
-          <option value="cerrada">En proceso</option>
-          <option value="en proceso">Cerrada</option>
+          <option value="en proceso">En proceso</option>
+          <option value="cerrada">Cerrada</option>
         </select>
       </div>
       <button type="submit" class="btn btn-warning" >Editar</button>
@@ -38,16 +38,6 @@
   }@else {
     <h1>Añadir incidencia</h1>
     <form (ngSubmit)="onSubmit()">
-      @if(add){
-        <div>
-          <div id="add" class="alert alert-success">{{ add }}</div>
-        </div>        
-        }
-        @if(error){
-          <div>
-            <div id="error" class="alert alert-danger">{{ error }}</div>
-          </div>
-        }
       <div class="mb-3">
         <label for="title" class="form-label">Título</label>
         <input type="text" class="form-control" id="title" aria-describedby="titleHelp"  [(ngModel)]="issue.title" name="title">
@@ -62,3 +52,4 @@
   }
 </div>
 </main>
+
